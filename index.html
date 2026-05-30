@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>portofolio  // EXTENDED</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- RESET & VARIABLES --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Space Grotesk', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        :root {
+            --bg-dark: #0d0d0e;
+            --bg-card: #16161a;
+            --gray-light: #a1a1aa;
+            --gray-accent: #27272a;
+            --neon-red: #ff2a5f;
+            --dark-red: #520b1b;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        /* Ambient Glow Effects */
+        .glow-1 {
+            position: fixed;
+            top: -10%;
+            left: -10%;
+            width: 60vw;
+            height: 60vw;
+            background: radial-gradient(circle, rgba(255, 42, 95, 0.12) 0%, rgba(0,0,0,0) 70%);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .glow-2 {
+            position: absolute;
+            bottom: 10%;
+            right: -10%;
+            width: 50vw;
+            height: 50vw;
+            background: radial-gradient(circle, rgba(255, 42, 95, 0.08) 0%, rgba(0,0,0,0) 70%);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* --- NAVBAR --- */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2rem 5%;
+            border-bottom: 1px solid var(--gray-accent);
+            position: sticky;
+            top: 0;
+            background: rgba(13, 13, 14, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 100;
+        }
+
+        .logo {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: -1px;
+        }
+
+        .logo span {
+            color: var(--neon-red);
+            text-shadow: 0 0 10px rgba(255, 42, 95, 0.5);
+        }
+
+        .nav-links a {
+            color: var(--gray-light);
+            text-decoration: none;
+            margin-left: 2rem;
+            font-weight: 700;
+            transition: 0.3s;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+        }
+
+        .nav-links a:hover {
+            color: var(--neon-red);
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            min-height: 85vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 0 5%;
+        }
+
+        .hero-tag {
+            background: var(--gray-accent);
+            color: #fff;
+            padding: 0.5rem 1rem;
+            font-weight: 700;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid var(--neon-red);
+        }
+
+        .hero h1 {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(3.5rem, 10vw, 7rem);
+            line-height: 0.85;
+            font-weight: 800;
+            text-transform: uppercase;
+            margin-bottom: 2.5rem;
+        }
+
+        .hero h1 span {
+            color: transparent;
+            -webkit-text-stroke: 1px #fff;
+        }
+
+        /* SOCIAL BUTTONS */
+        .social-container {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-social {
+            display: inline-flex;
+            align-items: center;
+            padding: 1rem 2rem;
+            background: transparent;
+            color: #fff;
+            border: 2px solid var(--neon-red);
+            text-decoration: none;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            transition: 0.3s ease;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .btn-social::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--neon-red);
+            transition: 0.3s ease;
+            z-index: -1;
+        }
+
+        .btn-social:hover::before {
+            left: 0;
+        }
+
+        .btn-social:hover {
+            box-shadow: 0 0 25px rgba(255, 42, 95, 0.6);
+            color: #121214;
+        }
+
+        /* --- RUNNING TEXT TICKER --- */
+        .ticker-wrap {
+            width: 100%;
+            overflow: hidden;
+            background: var(--neon-red);
+            padding: 1rem 0;
+            transform: rotate(-1deg);
+            margin: 4rem 0;
+            box-shadow: 0 0 20px rgba(255, 42, 95, 0.4);
+        }
+
+        .ticker {
+            display: flex;
+            white-space: nowrap;
+            animation: marquee 20s linear infinite;
+        }
+
+        .ticker span {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            color: #0d0d0e;
+            padding: 0 2rem;
+        }
+
+        @keyframes marquee {
+            0% { transform: translate3d(0, 0, 0); }
+            100% { transform: translate3d(-50%, 0, 0); }
+        }
+
+        /* --- SECTION STRUCTURE --- */
+        section {
+            padding: 6rem 5%;
+            position: relative;
+        }
+
+        .section-title {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            text-transform: uppercase;
+            margin-bottom: 4rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .section-title::after {
+            content: '';
+            flex-grow: 1;
+            height: 2px;
+            background: var(--gray-accent);
+        }
+
+        .section-title span {
+            color: var(--neon-red);
+        }
+
+        /* --- ABOUT SECTION --- */
+        .about-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text h3 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            line-height: 1.2;
+        }
+
+        .about-text p {
+            color: var(--gray-light);
+            font-size: 1.1rem;
+            line-height: 1.7;
+            margin-bottom: 2rem;
+        }
+
+        /* Mini Stats Box */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .stat-box {
+            background: var(--bg-card);
+            border: 1px solid var(--gray-accent);
+            padding: 1.5rem;
+            border-left: 4px solid var(--neon-red);
+        }
+
+        .stat-box h4 {
+            font-family: 'Syne', sans-serif;
+            font-size: 2rem;
+            color: #fff;
+        }
+
+        .stat-box p {
+            margin: 0;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            color: var(--gray-light);
+        }
+
+        /* --- WORKS GALLERY (3 FOTO) --- */
+        .grid-portfolio {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--gray-accent);
+            overflow: hidden;
+            position: relative;
+            transition: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .card:hover {
+            transform: translateY(-12px);
+            border-color: var(--neon-red);
+            box-shadow: 0 15px 35px rgba(255, 42, 95, 0.2);
+        }
+
+        .img-container {
+            width: 100%;
+            height: 450px;
+            background: #222;
+            overflow: hidden;
+        }
+
+        .img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(80%) contrast(110%);
+            transition: 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .card:hover .img-container img {
+            filter: grayscale(0%) contrast(100%);
+            transform: scale(1.05);
+        }
+
+        .card-info {
+            padding: 2rem;
+        }
+
+        .card-category {
+            color: var(--neon-red);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            display: block;
+            letter-spacing: 1px;
+        }
+
+        .card-title {
+            font-size: 1.6rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-family: 'Syne', sans-serif;
+        }
+
+        /* --- SKILLS & SERVICES --- */
+        .services-list {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .service-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2.5rem 0;
+            border-bottom: 1px solid var(--gray-accent);
+            transition: 0.3s;
+        }
+
+        .service-item:hover {
+            padding-left: 1rem;
+            border-bottom-color: var(--neon-red);
+        }
+
+        .service-num {
+            color: var(--neon-red);
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .service-title {
+            font-family: 'Syne', sans-serif;
+            font-size: 2rem;
+            text-transform: uppercase;
+        }
+
+        .service-desc {
+            color: var(--gray-light);
+            max-width: 40%;
+            text-align: right;
+        }
+
+        /* --- CONTACT SECTION --- */
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+        }
+
+        .contact-info p {
+            font-size: 1.2rem;
+            color: var(--gray-light);
+            margin-bottom: 2rem;
+        }
+
+        .contact-form input, .contact-form textarea {
+            width: 100%;
+            padding: 1.2rem;
+            background: var(--bg-card);
+            border: 1px solid var(--gray-accent);
+            color: #fff;
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+            transition: 0.3s;
+        }
+
+        .contact-form input:focus, .contact-form textarea:focus {
+            outline: none;
+            border-color: var(--neon-red);
+            box-shadow: 0 0 10px rgba(255, 42, 95, 0.2);
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 1.2rem;
+            background: var(--neon-red);
+            color: #121214;
+            border: none;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn-submit:hover {
+            background: #fff;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            padding: 4rem 5%;
+            border-top: 1px solid var(--gray-accent);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--gray-light);
+            font-size: 0.9rem;
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 968px) {
+            .about-container, .contact-container {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+            .service-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+            .service-desc {
+                max-width: 100%;
+                text-align: left;
+            }
+            footer {
+                flex-direction: column;
+                gap: 1.5rem;
+                text-align: center;
+            }
+        }
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hero h1 { margin-bottom: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="glow-1"></div>
+
+    <nav>
+        <div class="logo">Portofoli<span>Rifaalqorni</span></div>
+        <div class="nav-links">
+            <a href="#about">About</a>
+            <a href="#work">Hobby</a>
+            <a href="#skills">Ambition</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-tag">portofolio</div>
+        <h1>WELCOME<br><span>INDONESIAN</span><br>CITIZENS.</h1>
+        
+        <div class="social-container">
+            <a href="https://tiktok.com/@r1falitass" target="_blank" class="btn-social">TikTok // @r1falitass</a>
+            <a href="https://instagram.com/rifalitass" target="_blank" class="btn-social">Instagram // @rifalitass</a>
+        </div>
+    </section>
+
+    <div class="ticker-wrap">
+        <div class="ticker">
+            <span>• CREATIVE DISRUPTION</span>
+            <span>• VISIONARY 2026</span>
+            <span>• HIGH CONTRAST SOUL</span>
+            <span>• TIKTOK & INSTAGRAM</span>
+            <span>• CREATIVE DISRUPTION</span>
+            <span>• VISIONARY 2026</span>
+            <span>• HIGH CONTRAST SOUL</span>
+            <span>• TIKTOK & INSTAGRAM</span>
+        </div>
+    </div>
+
+    <section id="about">
+        <h2 class="section-title">01 / <span>THE PROFILE</span></h2>
+        <div class="about-container">
+            <div class="about-text">
+                <h3></h3>
+                <p>"Hello, let me introduce myself. My name is Rifa. I come from Banjar, West Java. I have a few hobbies that I'm really passionate about, including coding, gaming, and astrophotography. It's a pleasure to meet you."</p>
+                <div class="stats-grid">
+                    <div class="stat-box">
+                        <h4>2+</h4>
+                        <p>Projects Done</p>
+                    </div>
+                    <div class="stat-box">
+                        <h4>10+</h4>
+                        <p>Total Reach</p>
+                    </div>
+                </div>
+            </div>
+            <div class="about-text" style="border-left: 2px dashed var(--gray-accent); padding-left: 2rem;">
+                <p style="font-style: italic; color: #fff;">"Apa yang kamu lakukan hari ini adalah penentu dari siapa dirimu di masa depan. Investasikan waktumu dengan bijak."</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="work">
+        <h2 class="section-title">02 / <span>HOBBY</span></h2>
+        
+        <div class="grid-portfolio">
+            <div class="card">
+                <div class="img-container">
+                    <img src="WhatsApp Image 2026-05-30 at 18.24.52.jpeg">
+                </div>
+                <div class="card-info">
+                    <span class="card-category">Mobilagends</span>
+                    <h3 class="card-title">GAMING</h3>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="img-container">
+                    <img src="WhatsApp Image 2026-05-30 at 12.00.53.png">
+                </div>
+                <div class="card-info">
+                    <span class="card-category">MilkyWay</span>
+                    <h3 class="card-title">Astrophotography</h3>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="img-container">
+                    <img src="Belajar-Coding.png">
+                </div>
+                <div class="card-info">
+                    <span class="card-category">Developer</span>
+                    <h3 class="card-title">Coding</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills">
+        <h2 class="section-title">03 / <span>AMBITION</span></h2>
+        <div class="services-list">
+            <div class="service-item">
+                <span class="service-num">[ 01 ]</span>
+                <h3 class="service-title">RANK IMORTAL</h3>
+                <p class="service-desc"></p>
+            </div>
+            <div class="service-item">
+                <span class="service-num">[ 02 ]</span>
+                <h3 class="service-title">have a telescope</h3>
+                <p class="service-desc"></p>
+            </div>
+            <div class="service-item">
+                <span class="service-num">[ 03 ]</span>
+                <h3 class="service-title">become an engineer</h3>
+                <p class="service-desc"></p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="glow-2"></div>
+        <h2 class="section-title">04 / <span>LET'S COLLAB</span></h2>
+        <div class="contact-container">
+            <div class="contact-info">
+                <p>Punya ide gila, konsep project masa depan, atau ajakan kolaborasi konten seru? Kirim pesan sekarang, mari kita realisasikan.</p>
+                <div style="margin-top: 2rem;">
+                    <p style="font-size: 0.9rem; text-transform: uppercase; color: var(--neon-red); font-weight: 700; margin-bottom: 0.5rem;">Direct Broadcast</p>
+                    <h3 style="font-size: 1.5rem;">Rifaalqorni@gmail.com</h3>
+                </div>
+            </div>
+            <div class="contact-form">
+                <form action="#" onsubmit="event.preventDefault(); alert('🚀 Project Request Sent!');">
+                    <input type="text" placeholder="YOUR NAME" required>
+                    <input type="email" placeholder="YOUR EMAIL" required>
+                    <textarea rows="5" placeholder="TELL ME ABOUT YOUR VISION..." required></textarea>
+                    <button type="submit" class="btn-submit">Launch Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; for the Next Generation.</p>
+        <p>STAY EDGY // STAY REBEL</p>
+    </footer>
+
+</body>
+</html>
